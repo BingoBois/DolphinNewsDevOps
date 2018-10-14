@@ -1,5 +1,9 @@
 # Devops stuff for Dolphinnews
 
+https://hub.docker.com/u/dolphinnews/
+
+nginx conf goes into /etc/nginx/etc.d/
+
 Kubernetes:
 --pod-network-cidr=10.244.0.0/16
 
@@ -14,6 +18,9 @@ kubectl create -f file.yaml
 
 // Sort by label (-l) | show labels = --show-labels
 kubectl get pod -l app=sa-frontend
+
+// Service
+kubectl create -f service-dolphin-frontend-lb.yaml
 
 Deploy and apply update:
 kubectl apply -f sa-frontend-deployment.yaml

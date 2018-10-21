@@ -5,4 +5,4 @@ WORKDIR /root/DolphinNewsNode
 RUN npm i -g typescript
 RUN npm install
 RUN tsc
-CMD ["npm" "start"]
+CMD ["npm", "start"]

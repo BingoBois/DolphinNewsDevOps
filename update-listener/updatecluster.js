@@ -10,7 +10,13 @@ function updateCluster(podType, scriptPath=`/root/devops/update-listener/kuber.s
 	let regex = /(- image: )([\S]*)/;
 	regexReplace(filePath, regex, `dolphinnews/frontend:${hash}`);
       }
-      let child = spawn('bash', [scriptPath, podType, `dolphinnews/frontend:${hash}`]);
+      if(podType === 'DolphinNewsNode'){
+        let filePath = '/root/devops/resource-manifests/deployments/dolphin-backend-deployment.yaml';
+	let regex = /(- image: )([\S]*)/;
+	regexReplace(filePath, regex, `dolphinnews/backend:${hash}`);
+      }
+
+      let child = spawn('bash', [scriptPath, podType, `dolphinnews/backend:${hash}`]);
   
       child.stderr.on('data', (data) => {
         reject('Error: ' + data);

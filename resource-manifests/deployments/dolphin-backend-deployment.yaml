@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dolphin-backend
+spec:
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: dolphin-backend
+    spec:
+     containers:
+       - image: dolphinnews/backend:567f1c
+         imagePullPolicy: Always
+         name: dolphin-backend
+         ports:
+           - containerPort: 3000

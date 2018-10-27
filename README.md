@@ -1,15 +1,15 @@
 # Devops stuff for Dolphinnews  
   
 https://hub.docker.com/u/dolphinnews/  
-
-Resources for leaning Kubernetes:
-https://medium.freecodecamp.org/learn-kubernetes-in-under-3-hours-a-detailed-guide-to-orchestrating-containers-114ff420e882
-https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational
-
-Info about this setup:
-Have a "update-listener" listening on webhooks from the backend github repo. Automatically updates the system.
-Frontend has to build the dockerimage locally, then SSH into the machine and run the deployFrontend.js script. (Since our droplet doesn't have enough RAM ...)
-Uses MetalLB as load balencer, and nginx.
+  
+Resources for leaning Kubernetes:  
+https://medium.freecodecamp.org/learn-kubernetes-in-under-3-hours-a-detailed-guide-to-orchestrating-containers-114ff420e882  
+https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational  
+  
+Info about this setup:  
+Has a "update-listener" listening on webhooks from the backend github repo. Automatically updates the system.  
+Frontend has to build the dockerimage locally, then SSH into the machine and run the deployFrontend.js script. (Since our droplet doesn't have enough RAM ...)  
+Uses MetalLB as load balencer, and nginx.  
   
 nginx conf goes into /etc/nginx/etc.d/  
   

@@ -2,13 +2,12 @@ const fs = require('fs');
 let spawn = require('child_process').spawn;
 
 let imageTag = process.argv[2];
-if (imageTag.length != 6){
-  console.log('Go on other machine and build the resource-manifests/images/frontend/Dockerfile');
-  console.log('Name it with a random tag at the end like this dolphinnews/frontend:8501c4');
+if (imageTag === undefined || imageTag.length != 6 ){
+  console.log('\nGo on your local machine and build the resource-manifests/images/frontend/Dockerfile with a random 6 character end tag');
+  console.log('sudo docker build -t dolphinnews/frontend:8501c4 .');
   console.log('docker push');
   console.log('Run this script, and give it the end tag as argument, like this:');
   console.log('node deployFrontend.js 8501c4\n');
-  console.log('Image tag needs to be 6 characters!');
 }
 else{
   updateFrontend(imageTag);
@@ -17,11 +16,11 @@ else{
 
 function updateFrontend(imageTag) {
   return new Promise((resolve, reject) => {
+
     let filePath = '/root/devops/resource-manifests/deployments/dolphin-frontend-deployment.yaml';
     let regex = /(- image: )([\S]*)/;
-
     regexReplace(filePath, regex, `dolphinnews/frontend:${imageTag}`);
-    let child = spawn('bash', [`kubectl apply -f ${filePath} --record`]);
+    let child = spawn('bash', ['-c', `kubectl apply -f ${filePath} --record`]);
 
     child.stderr.on('data', (data) => {
       reject('Error: ' + data);

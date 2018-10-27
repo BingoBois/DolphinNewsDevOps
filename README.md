@@ -8,7 +8,8 @@ https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundati
   
 Info about this setup:  
 Has a "update-listener" listening on webhooks from the backend github repo. Automatically updates the system.  
-Frontend has to build the dockerimage locally, then SSH into the machine and run the deployFrontend.js script. (Since our droplet doesn't have enough RAM ...)  
+Frontend has to build the dockerimage locally, then SSH into the machine and run the deployFrontend.js script.  
+(Since our droplet doesn't have enough RAM ...)  
 Uses MetalLB as load balencer, and nginx.  
   
 nginx conf goes into /etc/nginx/etc.d/  

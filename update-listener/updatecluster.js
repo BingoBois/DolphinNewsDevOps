@@ -7,13 +7,13 @@ function updateCluster(podType, scriptPath=`/root/devops/update-listener/kuber.s
       let hash = getHash();
       if(podType === 'DolphinNewsFrontend'){
         let filePath = '/root/devops/resource-manifests/deployments/dolphin-frontend-deployment.yaml';
-	let regex = /(- image: )([\S]*)/;
-	regexReplace(filePath, regex, `dolphinnews/frontend:${hash}`);
+        let regex = /(- image: )([\S]*)/;
+        regexReplace(filePath, regex, `dolphinnews/frontend:${hash}`);
       }
       if(podType === 'DolphinNewsNode'){
         let filePath = '/root/devops/resource-manifests/deployments/dolphin-backend-deployment.yaml';
-	let regex = /(- image: )([\S]*)/;
-	regexReplace(filePath, regex, `dolphinnews/backend:${hash}`);
+        let regex = /(- image: )([\S]*)/;
+        regexReplace(filePath, regex, `dolphinnews/backend:${hash}`);
       }
 
       let child = spawn('bash', [scriptPath, podType, `dolphinnews/backend:${hash}`]);

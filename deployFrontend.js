@@ -5,7 +5,7 @@ let imageTag = process.argv[2];
 if (imageTag === undefined || imageTag.length != 6 ){
   console.log('\nGo on your local machine and build the resource-manifests/images/frontend/Dockerfile with a random 6 character end tag');
   console.log('sudo docker build -t dolphinnews/frontend:8501c4 .');
-  console.log('docker push');
+  console.log('docker push dolphinnews/frontend:8501c4');
   console.log('Run this script, and give it the end tag as argument, like this:');
   console.log('node deployFrontend.js 8501c4\n');
 }

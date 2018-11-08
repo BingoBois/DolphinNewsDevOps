@@ -3,7 +3,7 @@ FROM node:8.12.0-jessie as build-deps
 WORKDIR /root
 RUN git clone https://github.com/BingoBois/DolphinNewsFrontend.git
 WORKDIR /root/DolphinNewsFrontend
-RUN npm install
+COPY node_modules ./node_modules/
 RUN npm i -g typescript
 RUN tsc
 RUN npm run build

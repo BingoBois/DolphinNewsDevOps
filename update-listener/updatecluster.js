@@ -2,30 +2,23 @@ const crypto = require('crypto');
 const fs = require('fs');
 let spawn = require('child_process').spawn;
 
-function updateCluster(podType, scriptPath=`/root/devops/update-listener/kuber.sh`) {
-    return new Promise((resolve, reject) => {
-      let hash = getHash();
-      if(podType === 'DolphinNewsFrontend'){
-        let filePath = '/root/devops/resource-manifests/deployments/dolphin-frontend-deployment.yaml';
-        let regex = /(- image: )([\S]*)/;
-        regexReplace(filePath, regex, `dolphinnews/frontend:${hash}`);
-      }
-      if(podType === 'DolphinNewsNode'){
-        let filePath = '/root/devops/resource-manifests/deployments/dolphin-backend-deployment.yaml';
-        let regex = /(- image: )([\S]*)/;
-        regexReplace(filePath, regex, `dolphinnews/backend:${hash}`);
-      }
+const FRONTEND_YAML_PATH = '/home/dolphin/DolphinNewsDevOps/resource-manifests/deployments/dolphin-frontend-deployment.yaml';
+const BACKEND_YAML_PATH = '/home/dolphin/DolphinNewsDevOps/resource-manifests/deployments/dolphin-backend-deployment.yaml';
 
-      let child = spawn('bash', [scriptPath, podType, `dolphinnews/backend:${hash}`]);
-  
-      child.stderr.on('data', (data) => {
-        reject('Error: ' + data);
-      });
-  
-      child.on('exit', function () {
-        resolve('exit');
-      });
+function updateCluster(podType, scriptPath = `/home/dolphin/DolphinNewsDevOps/update-listener/kuber.sh`) {
+  return new Promise((resolve, reject) => {
+    let hash = getHash();
+    const filePath = (podType === 'DolphinNewsFrontend') ? FRONTEND_YAML_PATH : BACKEND_YAML_PATH;
+    const regex = /(- image: )([\S]*)/;
+    regexReplace(filePath, regex, `dolphinnews/${filePath === FRONTEND_YAML_PATH ? 'frontend' : 'backend'}:${hash}`);
+    let child = spawn('bash', [scriptPath, podType, `dolphinnews/${filePath === FRONTEND_YAML_PATH ? 'frontend' : 'backend'}:${hash}`]);
+    child.stderr.on('data', (data) => {
+      reject('Error: ' + data);
     });
+    child.on('exit', function () {
+      resolve('exit');
+    });
+  });
 }
 
 function getHash(){

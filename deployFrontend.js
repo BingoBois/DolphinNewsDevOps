@@ -17,7 +17,7 @@ else{
 function updateFrontend(imageTag) {
   return new Promise((resolve, reject) => {
 
-    let filePath = '/root/devops/resource-manifests/deployments/dolphin-frontend-deployment.yaml';
+    let filePath = '/home/dolphin/DolphinNewsDevOps/resource-manifests/deployments/dolphin-frontend-deployment.yaml';
     let regex = /(- image: )([\S]*)/;
     regexReplace(filePath, regex, `dolphinnews/frontend:${imageTag}`);
     let child = spawn('bash', ['-c', `kubectl apply -f ${filePath} --record`]);

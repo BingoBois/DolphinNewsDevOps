@@ -3,7 +3,7 @@ const createHandler = require('github-webhook-handler');
 const handler = createHandler({ path: '/webhook', secret: 'sutmig' });
 const updater = require('./updatecluster'); 
 
-let buildEvents = [`Waiting for work | TIME: ${new Date(new Date().getTime() + 7200000)}`];
+let buildEvents = [`Waiting for work | TIME: ${new Date(new Date().getTime())}`];
 
 http.createServer(function (req, res) {
   handler(req, res, function (err) {
@@ -12,20 +12,21 @@ http.createServer(function (req, res) {
     buildEvents.reverse().forEach((e) => {
       prettyMessage += `${e}\n\n`;
     });
-    res.end(prettyMessage)
+    buildEvents.reverse();
+    res.end(prettyMessage);
   })
 }).listen(7777)
  
 handler.on('error', function (err) {
-  buildEvents.push(`Error: ${err.message} | TIME: ${new Date(new Date().getTime() + 7200000)}`);
+  buildEvents.push(`Error: ${err.message} | TIME: ${new Date(new Date().getTime())}`);
 })
  
 handler.on('push', async function (event) {
   let repoName = event.payload.repository.name;
   if(event.payload.ref === "refs/heads/master"){
-    buildEvents.push(`Started building ${repoName} | TIME: ${new Date(new Date().getTime() + 7200000)}`);
+    buildEvents.push(`Started building ${repoName} | TIME: ${new Date(new Date().getTime())}`);
     await updater.updateCluster(event.payload.repository.name);
-    buildEvents.push(`Built ${repoName} done! | TIME: ${new Date(new Date().getTime() + 7200000)}`);
-    buildEvents.push(`Waiting for work | TIME: ${new Date(new Date().getTime() + 7200000)}`);
+    buildEvents.push(`Built ${repoName} done! | TIME: ${new Date(new Date().getTime())}`);
+    buildEvents.push(`Waiting for work | TIME: ${new Date(new Date().getTime())}`);
   }
 });

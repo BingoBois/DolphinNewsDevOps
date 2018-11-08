@@ -16,7 +16,7 @@ spec:
         app: dolphin-frontend
     spec:
      containers:
-       - image: dolphinnews/frontend:6b5c7a
+       - image: dolphinnews/frontend:c2444e
          imagePullPolicy: Always
          name: dolphin-frontend
          ports:

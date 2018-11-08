@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: dolphin-backend
 spec:
-  replicas: 2
+  replicas: 4
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -16,7 +16,7 @@ spec:
         app: dolphin-backend
     spec:
      containers:
-       - image: dolphinnews/backend:567f1c
+       - image: dolphinnews/backend:123412
          imagePullPolicy: Always
          name: dolphin-backend
          ports:

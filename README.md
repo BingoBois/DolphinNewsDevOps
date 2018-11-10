@@ -46,3 +46,6 @@ base: 10.244.x.x
 node1: 10.244.1.0/24  
 pod1: 10.244.1.8 | pod2: 10.244.1.9  
 addresses: 10.244.1.0-192.168.1.255  
+
+Prometheus:
+https://github.com/camilb/prometheus-kubernetes

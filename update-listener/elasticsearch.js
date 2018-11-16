@@ -1,4 +1,4 @@
-import elasticsearch from 'elasticsearch';
+const elasticsearch = require('elasticsearch');
 
 let client = new elasticsearch.Client({  
   hosts: [

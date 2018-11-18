@@ -12,7 +12,7 @@ function logMessage(message){
     type: 'statusmessage',
     body: {
       "Message": message,
-      "Time": new Date().toString()
+      "Time": new Date()
     }
   }, (err, resp) => {
     console.log(resp);

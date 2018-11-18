@@ -1,4 +1,4 @@
 update-listener/node_modules/
 resource-manifests/images/frontend/node_modules/
 update-listener/package-lock.json
-
+alert-watcher/node_modules/

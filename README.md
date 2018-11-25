@@ -11,7 +11,7 @@ Has a "update-listener" listening on webhooks from the backend github repo. Auto
 Frontend has to build the dockerimage locally, then SSH into the machine and run the deployFrontend.js script.  
 (Since our droplet doesn't have enough RAM ...)  
   
-EDIT: As we have upgraded to a newer droplet, we no longer need to build it locally, and everything is now on run using continous deployment, with Travis as our continous integration tool, and kubernetes running our pods.
+EDIT: As we have upgraded to a newer droplet, we no longer need to build it locally, and everything is now run using continous deployment, with Travis as our continous integration tool, and kubernetes running our pods.
   
 
 Uses MetalLB as load balencer, and nginx.  
